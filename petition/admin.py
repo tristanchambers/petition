@@ -6,5 +6,13 @@ from django.contrib import admin
 from .models import Petition
 from .models import Signature
 
-admin.site.register(Petition)
+class SignatureInline(admin.StackedInline):
+    model = Signature
+
+class PetitionAdmin(admin.ModelAdmin):
+    inlines = [
+        SignatureInline,
+    ]
+
 admin.site.register(Signature)
+admin.site.register(Petition, PetitionAdmin)
