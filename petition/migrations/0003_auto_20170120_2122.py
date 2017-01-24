@@ -12,10 +12,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='signature',
-            name='zip',
-        ),
         migrations.AddField(
             model_name='signature',
             name='email',
@@ -31,12 +27,6 @@ class Migration(migrations.Migration):
             model_name='signature',
             name='show_name',
             field=models.BooleanField(default='', verbose_name="Don't display my name"),
-            preserve_default=False,
-        ),
-        migrations.AddField(
-            model_name='signature',
-            name='zip_code',
-            field=models.CharField(default='', max_length=5, verbose_name='zip code'),
             preserve_default=False,
         ),
     ]

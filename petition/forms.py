@@ -11,7 +11,7 @@ class SignatureForm(forms.ModelForm):
             'last',
             'street',
             'city',
-            'zip_code',
+            'state',
             'email',
             'show_name',
             'opt_in',
