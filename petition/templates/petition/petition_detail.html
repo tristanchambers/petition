@@ -1,11 +1,15 @@
 <h1>{{ petition }}</h1>
+{% if signed %}
+<p> Thanks for signing! </p>
+{% else %}
+<h2>Sign the petition</h2>
+<form method="POST" class="sign-form">{% csrf_token %}
+  {{ signform.as_p }}
+  <button type="submit">sign</button>
+</form>
+{% endif %}
 <ul>
 {% for signature in signatures %}
   <li>{{ signature }} {{ signature.city }}</li>
 {% endfor %}
 </ul>
-<h2>Sign the petitoin</h2>
-<form method="POST" class="sign-form">{% csrf_token %}
-  {{ signform.as_p }}
-  <button type="submit">sign</button>
-</form>
