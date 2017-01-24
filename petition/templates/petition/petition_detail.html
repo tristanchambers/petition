@@ -17,6 +17,6 @@
 <p>Goal: {{ petition.goal }}</p>
 <ul>
 {% for signature in signatures %}
-  <li>{{ signature }} {{ signature.city }}</li>
+  <li>{{ signature }} {{ signature.city }}, {{ signature.state }}</li>
 {% endfor %}
 </ul>

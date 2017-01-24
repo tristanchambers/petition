@@ -28,4 +28,7 @@ class Signature(models.Model):
     dont_show_name = models.BooleanField(verbose_name="Don't display my name")
     opt_in = models.BooleanField(verbose_name="Keep me updated on this issue", default=True)
     def __str__(self):
-        return '%s %s' % (self.first, self.last)
+        if not self.dont_show_name:
+            return '%s %s' % (self.first, self.last)
+        else:
+            return "name not displayed"
