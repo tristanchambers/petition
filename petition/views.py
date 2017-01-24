@@ -14,10 +14,11 @@ def petition_list(request):
 
 def petition_detail(request, primary_key):
     petition = get_object_or_404(Petition, pk=primary_key)
-    signatures = Signature.objects.filter(petition=1)
+    signatures = Signature.objects.filter(petition=primary_key)
     # If this is a form submission, process the request
     # check if the user already signed the petition
     signed = request.session.get('has_signed', False)
+    signer_name = request.session.get('signer_name', "")
     if request.method == "POST":
         if not signed:
             signform_data = SignatureForm(request.POST)
@@ -26,7 +27,9 @@ def petition_detail(request, primary_key):
                 signature.petition = petition
                 signature.save()
                 request.session['has_signed'] = True
-
+                request.session['signer_name'] = signature.first
+                signed = True
+                signer_name = signature.first
     # Either way render the petition details
     signform = SignatureForm()
     return render(
@@ -37,5 +40,6 @@ def petition_detail(request, primary_key):
             'signatures': signatures,
             'signform': signform,
             'signed': signed,
+            'signer_name': signer_name,
         },
     )

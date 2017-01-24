@@ -1,13 +1,20 @@
 <h1>{{ petition }}</h1>
 {% if signed %}
-<p> Thanks for signing! </p>
-{% else %}
+<p> {{ signer_name }}, thanks for signing! </p>
+{% endif %}
+<p>Create by: {{ petition.created_by }}</p>
+<p>Addressed to: {{ petition.address_to }}</p>
+{{ petition.description|safe }}
+{{ petition.letter|safe }}
+{% if not signed %}
 <h2>Sign the petition</h2>
 <form method="POST" class="sign-form">{% csrf_token %}
   {{ signform.as_p }}
   <button type="submit">sign</button>
 </form>
 {% endif %}
+<p>{{ signatures|length }} signers</p>
+<p>Goal: {{ petition.goal }}</p>
 <ul>
 {% for signature in signatures %}
   <li>{{ signature }} {{ signature.city }}</li>

@@ -6,6 +6,12 @@ from django.db import models
 
 class Petition(models.Model):
     title = models.CharField(max_length=255)
+    created_by = models.CharField(max_length=255)
+    address_to = models.CharField(max_length=255)
+    description = models.TextField(max_length=5000)
+    letter = models.TextField(max_length=10000)
+    goal = models.PositiveIntegerField(default=1000)
+    region = models.CharField(max_length=255)
     def __str__(self):
         return self.title
 
