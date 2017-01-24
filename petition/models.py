@@ -25,7 +25,7 @@ class Signature(models.Model):
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=2)
     email = models.EmailField()
-    show_name = models.BooleanField(verbose_name="Don't display my name")
+    dont_show_name = models.BooleanField(verbose_name="Don't display my name")
     opt_in = models.BooleanField(verbose_name="Keep me updated on this issue", default=True)
     def __str__(self):
         return '%s %s' % (self.first, self.last)
