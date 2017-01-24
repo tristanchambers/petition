@@ -6,7 +6,7 @@ from django.contrib import admin
 from .models import Petition
 from .models import Signature
 
-class SignatureInline(admin.StackedInline):
+class SignatureInline(admin.TabularInline):
     model = Signature
 
 class PetitionAdmin(admin.ModelAdmin):
