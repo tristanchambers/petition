@@ -10,7 +10,7 @@ from .forms import SignatureForm
 
 def petition_list(request):
     petitions = Petition.objects.all()
-    return render(request, 'petition/petition_list.html', {'petitions': petitions, 'visited': visited})
+    return render(request, 'petition/petition_list.html', {'petitions': petitions})
 
 def petition_detail(request, primary_key):
     petition = get_object_or_404(Petition, pk=primary_key)
