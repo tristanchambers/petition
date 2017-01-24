@@ -13,6 +13,7 @@ class SignatureForm(forms.ModelForm):
             'city',
             'state',
             'email',
+            'comment',
             'dont_show_name',
             'opt_in',
         )
