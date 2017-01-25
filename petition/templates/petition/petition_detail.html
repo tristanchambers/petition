@@ -9,7 +9,19 @@
     <p>Created by: {{ petition.created_by }}</p>
     <p>Addressed to: {{ petition.address_to }}</p>
     {{ petition.description|safe }}
-    {{ petition.letter|safe }}
+    <div class="panel-group">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapse1"><span class="glyphicon glyphicon-triangle-bottom"></span> Read the letter</a>
+          </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+          <div class="panel-body">{{ petition.letter|safe }}</div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="col-md-4">
     <div class="progress">
@@ -17,8 +29,11 @@
         <span class="sr-only">Complete</span>
       </div>
     </div>
-    <p>{{ signatures|length }} signers</p>
-    <p>{{ petition.goal }} goal</p>
+    <div class="extents">
+      <p class="signers">{{ signatures|length }} signers</p>
+      <p class="goal">goal {{ petition.goal }}</p>
+      <br class="clearfix">
+    </div>
     {% if signed %}
     <p> {{ signer_name }}, thanks for signing! </p>
     {% endif %}
