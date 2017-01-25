@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponse
+from django.http import HttpResponseForbidden
+import csv
+
 
 # Create your views here.
 # https://docs.djangoproject.com/en/1.10/topics/http/views/
@@ -43,3 +47,38 @@ def petition_detail(request, primary_key):
             'signer_name': signer_name,
         },
     )
+
+def petition_csv(request, primary_key):
+    if request.user.has_perm('petition.change_petition'):
+        signatures = Signature.objects.filter(petition=primary_key)
+        response = HttpResponse(content_type='text/csv')
+        # TODO date.today().strftime("%Y-%m-%d")
+        response['Content-Disposition'] = 'attachment; filename="petition.csv"'
+        fieldnames = [
+            'first',
+            'last',
+            'street',
+            'city',
+            'state',
+            'email',
+            'comment',
+            'dont_show_name',
+            'opt_in',
+            ]
+        writer = csv.DictWriter(response, fieldnames=fieldnames)
+        writer.writeheader()
+        for signature in signatures:
+            writer.writerow({
+                'first': signature.first,
+                'last': signature.last,
+                'street': signature.street,
+                'city': signature.city,
+                'state': signature.state,
+                'email': signature.email,
+                'comment': signature.comment,
+                'dont_show_name': signature.dont_show_name,
+                'opt_in': signature.opt_in,
+            })
+        return response
+    else:
+        return HttpResponseForbidden()
