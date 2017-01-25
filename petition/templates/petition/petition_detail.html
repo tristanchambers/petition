@@ -3,33 +3,39 @@
 
 {% block content %}
 <h1>{{ petition }}</h1>
-<img src="{{ petition.hero_image }}">
-{% if signed %}
-<p> {{ signer_name }}, thanks for signing! </p>
-{% endif %}
-<p>Create by: {{ petition.created_by }}</p>
-<p>Addressed to: {{ petition.address_to }}</p>
-{{ petition.description|safe }}
-{{ petition.letter|safe }}
-{% if not signed %}
-<h2>Sign the petition</h2>
-
-<form method="POST" role="form">{% csrf_token %}
-  {{ signform|bootstrap }}
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Submit</button>
+<div class="row">
+  <div class="col-md-8">
+    <img src="{{ petition.hero_image }}">
+    <p>Created by: {{ petition.created_by }}</p>
+    <p>Addressed to: {{ petition.address_to }}</p>
+    {{ petition.description|safe }}
+    {{ petition.letter|safe }}
   </div>
-</form>
+  <div class="col-md-4">
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{ goal_progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ goal_progress }}%;">
+        <span class="sr-only">Complete</span>
+      </div>
+    </div>
+    <p>{{ signatures|length }} signers</p>
+    <p>{{ petition.goal }} goal</p>
+    {% if signed %}
+    <p> {{ signer_name }}, thanks for signing! </p>
+    {% endif %}
+    {% if not signed %}
+    <h2>Sign the petition</h2>
 
-{% endif %}
+    <form method="POST" role="form">{% csrf_token %}
+      {{ signform|bootstrap }}
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
 
-<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="{{ goal_progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ goal_progress }}%;">
-    <span class="sr-only">60% Complete</span>
+    {% endif %}
   </div>
 </div>
-<p>{{ signatures|length }} signers</p>
-<p>{{ petition.goal }} goal</p>
+
 <ul>
 {% for signature in signatures %}
   <li>{{ signature }} {{ signature.city }}, {{ signature.state }} {{ signature.comment }}</li>
