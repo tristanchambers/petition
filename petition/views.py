@@ -36,6 +36,7 @@ def petition_detail(request, primary_key):
                 signer_name = signature.first
     # Either way render the petition details
     signform = SignatureForm()
+    goal_progress = len(signatures) * (100/petition.goal)
     return render(
         request,
         'petition/petition_detail.html',
@@ -45,6 +46,7 @@ def petition_detail(request, primary_key):
             'signform': signform,
             'signed': signed,
             'signer_name': signer_name,
+            'goal_progress': goal_progress,
         },
     )
 
