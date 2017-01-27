@@ -51,9 +51,9 @@
   </div>
 </div>
 
-<ul>
+<ul class="signatures">
 {% for signature in signatures %}
-  <li>{{ signature }} {{ signature.city }}, {{ signature.state }} {{ signature.comment }}</li>
+  <li class="signature"><h3 class="signer_name">{{ signature }}</h3> <p class="signer_area">{{ signature.city }}, {{ signature.state }}</p> <p class="signer_comment">{{ signature.comment }}</p></li>
 {% endfor %}
 </ul>
 {% endblock %}

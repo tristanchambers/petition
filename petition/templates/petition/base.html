@@ -47,6 +47,13 @@
     div.extents .goal {
       float: right;
     }
+    ul.signatures {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul.signatures .signer_area {
+      color: gray;
+    }
     </style>
   </head>
   <body>
@@ -61,6 +68,11 @@
     <script>
       // Hide form labels when user starts typing
       $( ".form-group" ).keypress(function(e) {
+        if(e.keyCode !== 9){
+          $("label", this).hide();
+        }
+      });
+      $( ".form-group" ).change(function(e) {
         if(e.keyCode !== 9){
           $("label", this).hide();
         }
