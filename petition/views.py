@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 import csv
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 # https://docs.djangoproject.com/en/1.10/topics/http/views/
@@ -19,6 +19,19 @@ def petition_list(request):
 def petition_detail(request, primary_key):
     petition = get_object_or_404(Petition, pk=primary_key)
     signatures = Signature.objects.filter(petition=primary_key)
+    paginator = Paginator(signatures, 25) # Show 25 signatures per page
+
+    # pagination logic
+    page = request.GET.get('page')
+    try:
+        signatures = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        signatures = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        signatures = paginator.page(paginator.num_pages)
+
     # If this is a form submission, process the request
     # check if the user already signed the petition
     signed = request.session.get('has_signed', False)
