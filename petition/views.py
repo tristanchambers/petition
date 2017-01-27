@@ -21,6 +21,8 @@ def petition_detail(request, primary_key):
     signatures = Signature.objects.filter(petition=primary_key)
     paginator = Paginator(signatures, 25) # Show 25 signatures per page
 
+    num_signatures = len(signatures)
+
     # pagination logic
     page = request.GET.get('page')
     try:
@@ -59,6 +61,7 @@ def petition_detail(request, primary_key):
             'signform': signform,
             'signed': signed,
             'signer_name': signer_name,
+            'num_signatures': num_signatures,
             'goal_progress': goal_progress,
         },
     )
