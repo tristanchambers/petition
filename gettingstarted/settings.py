@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrapform',
     'petition',
+    'import_export',
 )
 
 MIDDLEWARE_CLASSES = (
