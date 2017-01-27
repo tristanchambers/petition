@@ -8,7 +8,7 @@
     <img src="{{ petition.hero_image }}">
     <p>Created by: {{ petition.created_by }}</p>
     <p>Addressed to: {{ petition.address_to }}</p>
-    {{ petition.description|safe }}
+    <p>{{ petition.description|safe }}</p>
     <div class="panel-group">
       <div class="panel panel-default">
         <div class="panel-heading">
