@@ -46,9 +46,9 @@ def petition_detail(request, primary_key):
                 signature.petition = petition
                 signature.save()
                 request.session['has_signed'] = True
-                request.session['signer_name'] = signature.first
+                request.session['signer_name'] = signature.first_name
                 signed = True
-                signer_name = signature.first
+                signer_name = signature.first_name
     # Either way render the petition details
     signform = SignatureForm()
     goal_progress = len(signatures) * (100/petition.goal)
@@ -73,9 +73,9 @@ def petition_csv(request, primary_key):
         # TODO date.today().strftime("%Y-%m-%d")
         response['Content-Disposition'] = 'attachment; filename="petition.csv"'
         fieldnames = [
-            'first',
-            'last',
-            'street',
+            'first_name',
+            'last_name',
+            'street_address',
             'city',
             'state',
             'email',
@@ -87,9 +87,9 @@ def petition_csv(request, primary_key):
         writer.writeheader()
         for signature in signatures:
             writer.writerow({
-                'first': signature.first,
-                'last': signature.last,
-                'street': signature.street,
+                'first_name': signature.first_name,
+                'last_name': signature.last_name,
+                'street_address': signature.street_address,
                 'city': signature.city,
                 'state': signature.state,
                 'email': signature.email,

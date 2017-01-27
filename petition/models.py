@@ -19,9 +19,9 @@ class Petition(models.Model):
 
 class Signature(models.Model):
     petition = models.ForeignKey(Petition)
-    first = models.CharField(max_length=100)
-    last = models.CharField(max_length=100)
-    street = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    street_address = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     state = models.CharField(max_length=2)
     email = models.EmailField()
@@ -30,6 +30,6 @@ class Signature(models.Model):
     opt_in = models.BooleanField(verbose_name="Keep me updated on this issue", default=True)
     def __str__(self):
         if not self.dont_show_name:
-            return '%s %s' % (self.first, self.last[0] + '.')
+            return '%s %s' % (self.first_name, self.last_name[0] + '.')
         else:
             return "name not displayed"
