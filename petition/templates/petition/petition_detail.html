@@ -1,6 +1,8 @@
 {% extends 'petition/base.html' %}
 {% load bootstrap %}
 
+{% block title %}Petition: {{ petition }}, addressed to {{ petition.address_to }}{% endblock %}
+
 {% block content %}
 <h1>{{ petition }}</h1>
 <div class="row">
