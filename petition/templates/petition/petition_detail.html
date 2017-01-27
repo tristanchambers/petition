@@ -5,7 +5,7 @@
 <h1>{{ petition }}</h1>
 <div class="row">
   <div class="col-md-8">
-    <img src="{{ petition.hero_image }}">
+    <img id="hero-image" src="{{ petition.hero_image }}">
     <p>Created by: {{ petition.created_by }}</p>
     <p>Addressed to: {{ petition.address_to }}</p>
     <p>{{ petition.description|safe }}</p>
@@ -50,26 +50,29 @@
     {% endif %}
   </div>
 </div>
+<div class="row">
+  <div class="col-md-8">
+    <ul class="signatures" id="signatures">
+    {% for signature in signatures %}
+      <li class="signature"><h3 class="signer_name">{{ signature }}</h3> <p class="signer_area">{{ signature.city }}, {{ signature.state }}</p> <p class="signer_comment">{{ signature.comment }}</p></li>
+    {% endfor %}
+    </ul>
 
-<ul class="signatures" id="signatures">
-{% for signature in signatures %}
-  <li class="signature"><h3 class="signer_name">{{ signature }}</h3> <p class="signer_area">{{ signature.city }}, {{ signature.state }}</p> <p class="signer_comment">{{ signature.comment }}</p></li>
-{% endfor %}
-</ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if signatures.has_previous %}
+                <a href="?page={{ signatures.previous_page_number }}#signatures">previous</a>
+            {% endif %}
 
-<div class="pagination">
-    <span class="step-links">
-        {% if signatures.has_previous %}
-            <a href="?page={{ signatures.previous_page_number }}#signatures">previous</a>
-        {% endif %}
+            <span class="current">
+                page {{ signatures.number }} of {{ signatures.paginator.num_pages }}
+            </span>
 
-        <span class="current">
-            page {{ signatures.number }} of {{ signatures.paginator.num_pages }}
+            {% if signatures.has_next %}
+                <a href="?page={{ signatures.next_page_number }}#signatures">next</a>
+            {% endif %}
         </span>
-
-        {% if signatures.has_next %}
-            <a href="?page={{ signatures.next_page_number }}#signatures">next</a>
-        {% endif %}
-    </span>
+    </div>
+  </div>
 </div>
 {% endblock %}
