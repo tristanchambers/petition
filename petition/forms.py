@@ -5,7 +5,7 @@ from .models import Signature
 
 class SignatureForm(forms.ModelForm):
     captcha = ReCaptchaField()
-    
+
     class Meta:
         model = Signature
         fields = (

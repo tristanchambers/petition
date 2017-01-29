@@ -40,9 +40,9 @@ def petition_detail(request, primary_key):
     signer_name = request.session.get('signer_name', "")
     if request.method == "POST":
         if not signed:
-            signform_data = SignatureForm(request.POST)
-            if signform_data.is_valid():
-                signature = signform_data.save(commit=False)
+            signform = SignatureForm(request.POST)
+            if signform.is_valid():
+                signature = signform.save(commit=False)
                 signature.petition = petition
                 signature.save()
                 request.session['has_signed'] = True
@@ -50,7 +50,8 @@ def petition_detail(request, primary_key):
                 signed = True
                 signer_name = signature.first_name
     # Either way render the petition details
-    signform = SignatureForm()
+    else:
+        signform = SignatureForm()
     goal_progress = len(signatures) * (100/petition.goal)
     return render(
         request,
