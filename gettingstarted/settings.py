@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'bootstrapform',
     'petition',
     'import_export',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -137,3 +138,8 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+# Captcha settings
+NOCAPTCHA = True
+RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
+RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')

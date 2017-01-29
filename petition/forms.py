@@ -1,9 +1,11 @@
 from django import forms
+from captcha.fields import ReCaptchaField
 
 from .models import Signature
 
 class SignatureForm(forms.ModelForm):
-
+    captcha = ReCaptchaField()
+    
     class Meta:
         model = Signature
         fields = (
