@@ -3,6 +3,13 @@
 
 {% block title %}Petition: {{ petition }}, addressed to {{ petition.address_to }}{% endblock %}
 
+{% block fbopengraph %}
+    <meta property="og:description" content="Petition: Urge Mayor Cadieux to instruct Easthampton PD to ignore ICE detainer requests"/>
+    <meta property="og:image" content="{{ petition.hero_image }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:site_name" content="{{ petition.created_by }}"/>
+{% endblock %}
+
 {% block content %}
 <h1>{{ petition }}</h1>
 <div class="row">
