@@ -2,6 +2,7 @@
 {% load bootstrap %}
 
 {% block title %}Petition: {{ petition }}, addressed to {{ petition.address_to }}{% endblock %}
+{% block metadescription %}{{ petition.teaser_text }}{% endblock %}
 
 {% block fbopengraph %}
     <meta property="og:description" content="{{ petition.teaser_text }}"/>
@@ -9,6 +10,7 @@
     <meta property="og:type" content="website"/>
     <meta property="og:site_name" content="{{ petition.created_by }}"/>
 {% endblock %}
+
 
 {% block content %}
 <h1>{{ petition }}</h1>
