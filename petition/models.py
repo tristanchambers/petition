@@ -9,6 +9,7 @@ class Petition(models.Model):
     hero_image = models.URLField(default='')
     created_by = models.CharField(max_length=255)
     address_to = models.CharField(max_length=255)
+    teaser_text = models.CharField(max_length=255, help_text="Appears in search results, and social media shares.")
     description = models.TextField(max_length=5000)
     letter = models.TextField(max_length=10000)
     goal = models.PositiveIntegerField(default=1000)

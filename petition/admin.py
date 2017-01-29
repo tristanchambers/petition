@@ -11,11 +11,6 @@ from import_export.admin import ImportExportModelAdmin
 class SignatureInline(admin.TabularInline):
     model = Signature
 
-class PetitionAdmin(admin.ModelAdmin):
-    inlines = [
-        SignatureInline,
-    ]
-
 class SignatureResource(resources.ModelResource):
 
     class Meta:
@@ -25,4 +20,4 @@ class SignatureIEAdmin(ImportExportModelAdmin):
     resource_class = SignatureResource
 
 admin.site.register(Signature, SignatureIEAdmin)
-admin.site.register(Petition, PetitionAdmin)
+admin.site.register(Petition)
