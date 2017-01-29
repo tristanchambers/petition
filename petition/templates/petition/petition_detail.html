@@ -11,6 +11,13 @@
     <meta property="og:site_name" content="{{ petition.created_by }}"/>
 {% endblock %}
 
+{% block twittercard %}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Petition: {{ petition }}, addressed to {{ petition.address_to }}">
+    <meta name="twitter:description" content="{{ petition.teaser_text }}">
+    <-- Twitter Summary card images must be at least 120x120px -->
+    <meta name="twitter:image" content="{{ petition.hero_image }}">
+{% endblock %}
 
 {% block content %}
 <h1>{{ petition }}</h1>
