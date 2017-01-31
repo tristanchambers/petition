@@ -71,7 +71,12 @@
   <div class="col-md-8">
     <ul class="signatures" id="signatures">
     {% for signature in signatures %}
-      <li class="signature"><h3 class="signer_name">{{ signature }}</h3> <p class="signer_area">{{ signature.city }}, {{ signature.state }}</p> <p class="signer_comment">{{ signature.comment }}</p></li>
+      <li class="signature">
+        <h3 class="signer_name">{{ signature }}</h3>
+        <p class="sign_date">{{ signature.created_date|timesince }}</p>
+        <p class="signer_area">{{ signature.city }}, {{ signature.state }}</p>
+        <p class="signer_comment">{{ signature.comment }}</p>
+      </li>
     {% endfor %}
     </ul>
 

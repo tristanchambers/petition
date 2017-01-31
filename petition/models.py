@@ -29,6 +29,8 @@ class Signature(models.Model):
     comment = models.TextField(max_length=500, blank=True)
     dont_show_name = models.BooleanField(verbose_name="Don't display my name")
     opt_in = models.BooleanField(verbose_name="Keep me updated on this issue", default=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
     def __str__(self):
         if not self.dont_show_name:
             return '%s %s' % (self.first_name, self.last_name[0] + '.')
