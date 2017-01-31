@@ -18,7 +18,7 @@ def petition_list(request):
 
 def petition_detail(request, primary_key):
     petition = get_object_or_404(Petition, pk=primary_key)
-    signatures = Signature.objects.filter(petition=primary_key)
+    signatures = Signature.objects.filter(petition=primary_key).order_by('-created_date')
     paginator = Paginator(signatures, 25) # Show 25 signatures per page
 
     num_signatures = len(signatures)
