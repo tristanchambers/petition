@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     url(r'^petitions/$', views.petition_list),
-    url(r'^petitions/(?P<primary_key>\d+)/$', views.petition_detail),
-    url(r'^petitions/(?P<primary_key>\d+)/csv$', views.petition_csv),
+    url(r'^petition/(?P<slug>[-\w]+)/csv$', views.petition_csv),
+    url(r'^petition/(?P<slug>[-\w]+)/$', views.petition_detail),
 ]

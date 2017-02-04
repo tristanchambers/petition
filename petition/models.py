@@ -15,6 +15,7 @@ class Petition(models.Model):
     goal = models.PositiveIntegerField(default=1000)
     region_city = models.CharField(max_length=255)
     region_state = models.CharField(max_length=2)
+    slug = models.SlugField(unique=True)
     def __str__(self):
         return self.title
 

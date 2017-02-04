@@ -16,8 +16,9 @@ def petition_list(request):
     petitions = Petition.objects.all()
     return render(request, 'petition/petition_list.html', {'petitions': petitions})
 
-def petition_detail(request, primary_key):
-    petition = get_object_or_404(Petition, pk=primary_key)
+def petition_detail(request, slug):
+    petition = get_object_or_404(Petition, slug=slug)
+    primary_key = petition.pk
     signatures = Signature.objects.filter(petition=primary_key).order_by('-created_date')
     paginator = Paginator(signatures, 25) # Show 25 signatures per page
 
@@ -67,7 +68,9 @@ def petition_detail(request, primary_key):
         },
     )
 
-def petition_csv(request, primary_key):
+def petition_csv(request, slug):
+    petition = get_object_or_404(Petition, slug=slug)
+    primary_key = petition.pk
     if request.user.has_perm('petition.change_petition'):
         signatures = Signature.objects.filter(petition=primary_key)
         response = HttpResponse(content_type='text/csv')
