@@ -18,6 +18,8 @@ class Petition(models.Model):
     slug = models.SlugField(unique=True)
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        return "/petition/%s/" % self.slug
 
     # Make property for current number of signatures
     @property

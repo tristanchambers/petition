@@ -24,7 +24,7 @@ def petition_detail(request, slug):
     primary_key = petition.pk
     signatures = Signature.objects.filter(petition=primary_key).order_by('-created_date')
     paginator = Paginator(signatures, 25) # Show 25 signatures per page
-    
+
     # pagination logic
     page = request.GET.get('page')
     try:
