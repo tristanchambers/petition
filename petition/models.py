@@ -20,7 +20,7 @@ class Petition(models.Model):
         return self.title
 
 class Signature(models.Model):
-    petition = models.ForeignKey(Petition)
+    petition = models.ForeignKey(Petition, editable=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     street_address = models.CharField(max_length=255)
