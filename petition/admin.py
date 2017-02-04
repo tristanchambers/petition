@@ -15,10 +15,13 @@ class SignatureResource(resources.ModelResource):
         model = Signature
 
 # Set up custom Signature admin settings
-class SignatureIEAdmin(ImportExportModelAdmin):
-    resource_class = SignatureResource
+class SignatureAdmin(ImportExportModelAdmin):
+    resource_class = SignatureResource # Set up import/export resource
     list_display = ('first_name', 'last_name','city', 'state', 'created_date')
 
+class PetitionAdmin(admin.ModelAdmin):
+    list_display = ('title', 'signatures_num')
+
 # Register admin forms
-admin.site.register(Signature, SignatureIEAdmin)
-admin.site.register(Petition)
+admin.site.register(Signature, SignatureAdmin)
+admin.site.register(Petition, PetitionAdmin)

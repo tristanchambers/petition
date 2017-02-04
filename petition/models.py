@@ -19,6 +19,12 @@ class Petition(models.Model):
     def __str__(self):
         return self.title
 
+    # Make property for current number of signatures
+    @property
+    def signatures_num(self):
+        signatures = Signature.objects.filter(petition=self.pk)
+        return(len(signatures))
+
 class Signature(models.Model):
     petition = models.ForeignKey(Petition, editable=False)
     first_name = models.CharField(max_length=100)
