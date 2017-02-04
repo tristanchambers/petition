@@ -12,6 +12,9 @@ from .models import Petition
 from .models import Signature
 from .forms import SignatureForm
 
+def home(request):
+    return render(request, 'petition/home.html', {'body_id': "home-page"})
+
 def petition_list(request):
     petitions = Petition.objects.all()
     return render(request, 'petition/petition_list.html', {'petitions': petitions})

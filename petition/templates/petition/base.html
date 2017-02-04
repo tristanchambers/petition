@@ -67,10 +67,17 @@
     #hero-image {
       width: 100%;
     }
+    body#home-page {
+      background-color: #000;
+    }
+    body#home-page div.main-container {
+        width: 100% !important;
+        padding: 0;
+    }
     </style>
   </head>
-  <body>
-    <div class="container">
+  <body id="{{ body_id }}">
+    <div class="container main-container">
     {% block content %}{% endblock %}
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
