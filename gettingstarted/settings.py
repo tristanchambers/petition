@@ -145,3 +145,6 @@ NOCAPTCHA = True
 if not DEBUG:
     RECAPTCHA_PUBLIC_KEY = os.environ.get('RECAPTCHA_PUBLIC_KEY')
     RECAPTCHA_PRIVATE_KEY = os.environ.get('RECAPTCHA_PRIVATE_KEY')
+
+# Sites
+SITE_ID = 1
