@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 
+import uuid
 
 class Migration(migrations.Migration):
 
@@ -15,7 +16,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='petition',
             name='slug',
-            field=models.SlugField(default='', unique=True),
+            field=models.SlugField(default=str(uuid.uuid4()), unique=True),
             preserve_default=False,
         ),
     ]
