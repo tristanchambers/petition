@@ -87,16 +87,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script>
       // Hide form labels when user starts typing
-      $( ".form-group" ).keypress(function(e) {
-        if(e.keyCode !== 9){
-          $("label", this).hide();
+      function hideLabels(e){
+        if($(this).val() == ''){
+          $(this).parents('div.form-group').children('label.control-label').show();
+        } else {
+          $(this).parents('div.form-group').children('label.control-label').hide();
         }
-      });
-      $( ".form-group" ).change(function(e) {
-        if(e.keyCode !== 9){
-          $("label", this).hide();
-        }
-      });
+      }
+      $("input").change(hideLabels);
+      $("input").keyup(hideLabels);
+      $("textarea").change(hideLabels);
+      $("textarea").keyup(hideLabels);
+      
+      // Run on page load too (for failed validation scenario)
+      $($("input").each(hideLabels));
+      $($("textarea").each(hideLabels));
     </script>
   </body>
 </html>
