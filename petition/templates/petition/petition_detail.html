@@ -65,6 +65,16 @@
     </form>
 
     {% endif %}
+
+    <!-- Twitter share button -->
+    <a class="twitter-share-button"
+    href="https://twitter.com/intent/tweet?text=I%20just%20signed%3A"
+    data-size="large">
+    Tweet</a>
+
+    <!-- Facebook share button -->
+    <div class="fb-share-button" data-href="http://{{ request.get_host }}{{ request.get_full_path }}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F{{ request.get_host|urlencode:"" }}{{ request.get_full_path|urlencode:"" }}&amp;src=sdkpreparse">Share</a></div>
+
   </div>
 </div>
 <div class="row">
