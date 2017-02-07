@@ -8,6 +8,6 @@ from django.views.generic import RedirectView
 urlpatterns = [
     url(r'^$', views.home),
     url(r'^petition/$', RedirectView.as_view(url='/')),
-    url(r'^petition/(?P<slug>[-\w]+)/csv$', views.petition_csv),
+#    url(r'^petition/(?P<slug>[-\w]+)/csv$', views.petition_csv),
     url(r'^petition/(?P<slug>[-\w]+)/$', views.petition_detail),
 ]
