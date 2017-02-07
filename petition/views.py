@@ -23,6 +23,7 @@ def petition_detail(request, slug):
     petition = get_object_or_404(Petition, slug=slug)
     primary_key = petition.pk
     signatures = Signature.objects.filter(petition=primary_key).order_by('-created_date')
+    signatures_local = Signature.objects.filter(petition=primary_key,city=petition.region_city)
     paginator = Paginator(signatures, 25) # Show 25 signatures per page
 
     # pagination logic
@@ -61,6 +62,7 @@ def petition_detail(request, slug):
         {
             'petition': petition,
             'signatures': signatures,
+            'signatures_local': signatures_local,
             'signform': signform,
             'signed': signed,
             'signer_name': signer_name,
