@@ -10,4 +10,6 @@ admin.autodiscover()
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('petition.urls')),
+    # https://docs.djangoproject.com/en/1.9/topics/auth/default/#module-django.contrib.auth.views
+    url('^', include('django.contrib.auth.urls')),
 ]
