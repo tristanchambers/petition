@@ -26,7 +26,8 @@
     <p>Created by: {{ petition.created_by }}</p>
     <p>Addressed to: {{ petition.address_to }}</p>
     <p>{{ petition.description|safe }}</p>
-    <div class="share-buttons">
+    {% if not signed %}
+    <div class="share-buttons under-letter">
       <!-- Twitter share button -->
       <a class="twitter-share-button"
       href="https://twitter.com/intent/tweet?text=I%20just%20signed%3A"
@@ -36,6 +37,7 @@
       <!-- Facebook share button -->
       <div class="fb-share-button" data-href="http://{{ request.get_host }}{{ request.get_full_path }}" data-layout="button_count" data-size="large" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F{{ request.get_host|urlencode:"" }}{{ request.get_full_path|urlencode:"" }}&amp;src=sdkpreparse">Share</a></div>
     </div>
+    {% endif %}
     <div class="panel-group">
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -58,7 +60,8 @@
       </div>
     </div>
     <div class="extents">
-      <p class="signers">{{ petition.signatures_num }} signers</p>
+      <p class="signers">{{ petition.signatures_num }} signers,</p>
+      <p class="signers local">{{ signatures_local|length }} local</p>
       <p class="goal">goal {{ petition.goal }}</p>
       <br class="clearfix">
     </div>
