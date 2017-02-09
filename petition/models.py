@@ -12,6 +12,7 @@ class Petition(models.Model):
     teaser_text = models.CharField(max_length=255, help_text="Appears in search results, and social media shares.")
     description = models.TextField(max_length=5000)
     letter = models.TextField(max_length=10000)
+    thank_you_message = models.TextField(max_length=1000)
     goal = models.PositiveIntegerField(default=1000)
     region_city = models.CharField(max_length=255)
     region_state = models.CharField(max_length=2)
