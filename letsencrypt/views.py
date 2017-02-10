@@ -12,4 +12,4 @@ def challenge_reply(request, slug):
     if slug == acme_name:
         return HttpResponse(acme_key)
     else:
-        raise Http404("Name not found")
+        return HttpResponse("Key not found")
