@@ -3,7 +3,8 @@ from django.http import HttpResponse, Http404
 import os
 
 # Create your views here.
-
+def hello_world(request):
+    return HttpResponse('<h1>Hello World</h1>')
 
 def challenge_reply(request, slug):
     acme_key = os.environ.get('ACME_CHALLENGE_KEY')
