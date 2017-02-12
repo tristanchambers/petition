@@ -68,7 +68,9 @@
 
     {% if signed %}
     <h2> {{ signer_name }}, thanks for signing! </h2>
-    {{ petition.thank_you_message|safe|urlize }}
+    <div id="thank-you-message">
+      {{ petition.thank_you_message|safe|urlize }}
+    </div>
     <div class="share-buttons">
       <!-- Twitter share button -->
       <a class="twitter-share-button"

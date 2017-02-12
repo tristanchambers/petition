@@ -19,7 +19,7 @@ class SignatureAdmin(ImportExportModelAdmin):
     resource_class = SignatureResource # Set up import/export resource
     list_display = ('first_name', 'last_name','city', 'state', 'created_date')
     list_display_links = ('first_name', 'last_name')
-    list_filter = ('petition__title', 'state', 'city')
+    list_filter = ('petition__title', 'state', 'city', 'opt_in')
 
 class PetitionAdmin(admin.ModelAdmin):
     list_display = ('title', 'signatures_num')
