@@ -41,6 +41,7 @@ def petition_detail(request, slug):
     # check if the user already signed the petition
     signed = request.session.get('has_signed', False)
     signer_name = request.session.get('signer_name', "")
+    sign_event = False
     if request.method == "POST":
         if not signed:
             signform = SignatureForm(request.POST)
@@ -51,7 +52,9 @@ def petition_detail(request, slug):
                 request.session['has_signed'] = True
                 request.session['signer_name'] = signature.first_name
                 signed = True
+                sign_event = True
                 signer_name = signature.first_name
+
     # Either way render the petition details
     else:
         signform = SignatureForm()
@@ -67,6 +70,7 @@ def petition_detail(request, slug):
             'signed': signed,
             'signer_name': signer_name,
             'goal_progress': goal_progress,
+            'sign_event': sign_event,
         },
     )
 
