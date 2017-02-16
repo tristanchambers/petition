@@ -127,3 +127,13 @@
   </div>
 </div>
 {% endblock %}
+
+{% block js %}
+  {% if sign_event %}
+  <script>
+    ga('send', 'event', {
+      eventAction: 'signature',
+    });
+  </script>
+  {% endif %}
+{% endblock js %}
