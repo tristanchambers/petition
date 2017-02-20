@@ -20,7 +20,7 @@ class Petition(models.Model):
     def __str__(self):
         return self.title
     def get_absolute_url(self):
-        return "/petition/%s/" % self.slug
+        return "/%s/" % self.slug
 
     # Make property for current number of signatures
     @property
