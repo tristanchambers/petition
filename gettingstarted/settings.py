@@ -154,3 +154,8 @@ SITE_ID = 1
 if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+if os.environ.get('GOOGLE_SITE_VERIFICATION_CODE'):
+    GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE')
+else:
+    GOOGLE_SITE_VERIFICATION_CODE = "google-verification-code-goes-here"

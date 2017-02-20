@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include('petition.urls')),
     url(r'', include('letsencrypt.urls')),
+    url(r'', include('googlewebmaster.urls')),
 ]
