@@ -44,7 +44,6 @@ INSTALLED_APPS = (
     'import_export',
     'captcha',
     'googlewebmaster',
-    'django.contrib.sitemaps',
 )
 
 MIDDLEWARE_CLASSES = (
