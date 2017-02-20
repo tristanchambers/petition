@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'petition',
     'import_export',
     'captcha',
+    'googlewebmaster',
 )
 
 MIDDLEWARE_CLASSES = (
