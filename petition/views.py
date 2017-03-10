@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 import csv
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 # https://docs.djangoproject.com/en/1.10/topics/http/views/
@@ -12,12 +13,40 @@ from .models import Petition
 from .models import Signature
 from .forms import SignatureForm
 
+COMMON_FIELDS = [
+        'title',
+        'hero_image',
+        'created_by',
+        'address_to',
+        'teaser_text',
+        'description',
+        'letter',
+        'thank_you_message',
+        'goal',
+        'region_city',
+        'region_state',
+]
+
+
 def home(request):
     return render(request, 'petition/home.html', {'body_id': "home-page"})
 
 def petition_list(request):
     petitions = Petition.objects.all()
     return render(request, 'petition/petition_list.html', {'petitions': petitions})
+
+class PetitionCreate(CreateView):
+    model = Petition
+    fields = COMMON_FIELDS
+    fields.append('slug')
+
+class PetitionUpdate(UpdateView):
+    model = Petition
+    fields = COMMON_FIELDS
+
+class PetitionDelete(DeleteView):
+    model = Petition
+    success_url = '/' # TODO: pick a better location for post-delete landing
 
 def petition_detail(request, slug):
     petition = get_object_or_404(Petition, slug=slug)
