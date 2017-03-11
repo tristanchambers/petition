@@ -6,7 +6,7 @@
 <form action="#" method="post">{% csrf_token %}
     <p>Are you sure you want to delete "{{ object }}"?</p>
     <div class="form-group">
-      <button type="submit" class="btn btn-primary" value="Confirm">Delete</button>
+      <button type="submit" class="btn btn-danger" value="Confirm">Delete</button>
     </div>
 </form>
 {% endblock %}
