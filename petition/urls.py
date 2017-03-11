@@ -8,7 +8,7 @@ from petition.views import PetitionCreate, PetitionUpdate, PetitionDelete
 urlpatterns = [
     url(r'^$', views.home),
 #    url(r'^petition/(?P<slug>[-\w]+)/csv$', views.petition_csv),
-    url(r'add/$', PetitionCreate.as_view(), name='petition-add'),
+    url(r'new/$', PetitionCreate.as_view(), name='petition-add'),
     url(r'(?P<slug>[-\w]+)/edit/$', PetitionUpdate.as_view(), name='petition-update'),
     url(r'(?P<slug>[-\w]+)/delete/$', PetitionDelete.as_view(), name='petition-delete'),
     url(r'^(?P<slug>[-\w]+)/$', views.petition_detail),

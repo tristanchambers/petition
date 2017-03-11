@@ -5,6 +5,7 @@ from django.http import HttpResponseForbidden
 import csv
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 # https://docs.djangoproject.com/en/1.10/topics/http/views/
@@ -35,16 +36,19 @@ def petition_list(request):
     petitions = Petition.objects.all()
     return render(request, 'petition/petition_list.html', {'petitions': petitions})
 
-class PetitionCreate(CreateView):
+class PetitionCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'petition.add_petition'
     model = Petition
     fields = COMMON_FIELDS
     fields.append('slug')
 
-class PetitionUpdate(UpdateView):
+class PetitionUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'petition.change_petition'
     model = Petition
     fields = COMMON_FIELDS
 
-class PetitionDelete(DeleteView):
+class PetitionDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'petition.delete_petition'
     model = Petition
     success_url = '/' # TODO: pick a better location for post-delete landing
 
