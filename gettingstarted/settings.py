@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'captcha',
     'googlewebmaster',
     'django.contrib.sitemaps',
+    'account',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,6 +57,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    "account.middleware.LocaleMiddleware",
+    "account.middleware.TimezoneMiddleware",
 )
 
 ROOT_URLCONF = 'gettingstarted.urls'
@@ -72,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "account.context_processors.account",
             ],
         },
     },

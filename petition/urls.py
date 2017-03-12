@@ -1,4 +1,4 @@
-from django.conf.urls import url
+from django.conf.urls import include, url
 from . import views
 from django.views.generic import RedirectView
 from petition.views import PetitionCreate, PetitionUpdate, PetitionDelete
@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'(?P<slug>[-\w]+)/edit/$', PetitionUpdate.as_view(), name='petition-update'),
     url(r'(?P<slug>[-\w]+)/delete/$', PetitionDelete.as_view(), name='petition-delete'),
     url(r'^(?P<slug>[-\w]+)/$', views.petition_detail),
+    url(r"^account/", include("account.urls")),
 ]
