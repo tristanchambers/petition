@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 import csv
+from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import PermissionRequiredMixin
@@ -31,6 +32,9 @@ COMMON_FIELDS = [
 
 def home(request):
     return render(request, 'petition/home.html', {'body_id': "home-page"})
+
+class Petitions(ListView):
+    model = Petition
 
 def petition_list(request):
     petitions = Petition.objects.all()

@@ -1,5 +1,12 @@
-<h1>Hello new world</h1>
-{% for petition in petitions %}
-  {{ petition }}
-  {{ petition.pk }}
+{% extends 'petition/base.html' %}
+{% load bootstrap %}
+
+{% block title %}Petitions{% endblock %}
+
+{% block content %}
+<ul class="listing listing-petitions">
+{% for object in object_list %}
+  <li><a href="{{ object.get_absolute_url }}">{{object.title}}</a> <span class="meta meta-progress">{{object.signatures_num}}/{{object.goal}}</span></li>
 {% endfor %}
+</ul>
+{% endblock %}
