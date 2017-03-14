@@ -30,7 +30,6 @@ COMMON_FIELDS = [
         'region_state',
 ]
 
-
 def home(request):
     return render(request, 'petition/home.html', {'body_id': "home-page"})
 
@@ -57,9 +56,41 @@ class PetitionUpdate(LoginRequiredMixin, UpdateView):
     model = Petition
     fields = COMMON_FIELDS
 
+    def dispatch(self, request, *args, **kwargs):
+        slug = kwargs['slug']
+        petition = Petition.objects.get(slug=slug)
+        if not request.user == petition.created_by:
+            return HttpResponseForbidden()
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        petition = form.save(commit=False)
+        if petition.created_by == self.request.user:
+            petition.save()
+            return HttpResponseRedirect(petition.get_absolute_url())
+        else:
+            return HttpResponseForbidden()
+
 class PetitionDelete(LoginRequiredMixin, DeleteView):
     model = Petition
     success_url = '/' # TODO: pick a better location for post-delete landing
+
+    def dispatch(self, request, *args, **kwargs):
+        slug = kwargs['slug']
+        petition = Petition.objects.get(slug=slug)
+        if not request.user == petition.created_by:
+            return HttpResponseForbidden()
+        else:
+            return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        petition = form.save(commit=False)
+        if petition.created_by == self.request.user:
+            petition.save()
+            return HttpResponseRedirect(petition.get_absolute_url())
+        else:
+            return HttpResponseForbidden()
 
 def petition_detail(request, slug):
     petition = get_object_or_404(Petition, slug=slug)
