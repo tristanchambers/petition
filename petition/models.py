@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 # https://docs.djangoproject.com/en/1.10/topics/db/models/
@@ -7,7 +8,7 @@ from django.db import models
 class Petition(models.Model):
     title = models.CharField(max_length=255)
     hero_image = models.URLField(default='')
-    created_by = models.CharField(max_length=255)
+    created_by = models.ForeignKey(User)
     address_to = models.CharField(max_length=255)
     teaser_text = models.CharField(max_length=255, help_text="Appears in search results, and social media shares.")
     description = models.TextField(max_length=5000)

@@ -1,12 +1,14 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 from django.http import HttpResponseForbidden
 import csv
 from django.views.generic import ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # https://docs.djangoproject.com/en/1.10/topics/http/views/
@@ -18,7 +20,6 @@ from .forms import SignatureForm
 COMMON_FIELDS = [
         'title',
         'hero_image',
-        'created_by',
         'address_to',
         'teaser_text',
         'description',
@@ -40,19 +41,23 @@ def petition_list(request):
     petitions = Petition.objects.all()
     return render(request, 'petition/petition_list.html', {'petitions': petitions})
 
-class PetitionCreate(PermissionRequiredMixin, CreateView):
-    permission_required = 'petition.add_petition'
+class PetitionCreate(LoginRequiredMixin, CreateView):
     model = Petition
     fields = COMMON_FIELDS
     fields.append('slug')
+#    fields.append('created_by')
 
-class PetitionUpdate(PermissionRequiredMixin, UpdateView):
-    permission_required = 'petition.change_petition'
+    def form_valid(self, form):
+        petition = form.save(commit=False)
+        petition.created_by = self.request.user
+        petition.save()
+        return HttpResponseRedirect(petition.get_absolute_url())
+
+class PetitionUpdate(LoginRequiredMixin, UpdateView):
     model = Petition
     fields = COMMON_FIELDS
 
-class PetitionDelete(PermissionRequiredMixin, DeleteView):
-    permission_required = 'petition.delete_petition'
+class PetitionDelete(LoginRequiredMixin, DeleteView):
     model = Petition
     success_url = '/' # TODO: pick a better location for post-delete landing
 
