@@ -165,3 +165,7 @@ if os.environ.get('GOOGLE_SITE_VERIFICATION_CODE'):
     GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE')
 else:
     GOOGLE_SITE_VERIFICATION_CODE = "google-verification-code-goes-here"
+
+# accounts, don't do email confirmation
+if DEBUG:
+    ACCOUNT_EMAIL_CONFIRMATION_EMAIL = False
