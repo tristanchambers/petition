@@ -137,11 +137,13 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
     <!-- /facebook share code setup -->
+
+    {% if user.is_authenticated %}
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Petition Tools</a>
+          <a class="navbar-brand" href="/">Petition Tools</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -153,14 +155,16 @@
               <ul class="dropdown-menu">
                 <li class="dropdown-header">Tristan</li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><a href="/accounts/settings">settings</a></li>
+                <li><a href="/accounts/logout">logout</a></li>
               </ul>
             </li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    {% endif %}
+
     <div class="container main-container">
     {% block content %}{% endblock %}
     </div>
