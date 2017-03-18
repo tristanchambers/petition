@@ -87,9 +87,6 @@
         width: 100% !important;
         padding: 0;
     }
-    body div.main-container {
-      margin-top: 40px;
-    }
     /* Make facebook button line up with twitter button */
     div.fb-share-button {
       vertical-align: top;
@@ -139,8 +136,8 @@
     <!-- /facebook share code setup -->
 
     {% if user.is_authenticated %}
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <!-- top navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -153,13 +150,13 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">My petitions</a></li>
+            <li class="active"><a href="/petitions">my petitions</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.get_username }}</a>
               <ul class="dropdown-menu">
-                <li class="dropdown-header">Tristan</li>
+                <li class="dropdown-header">{{ user.get_username }}</li>
                 <li role="separator" class="divider"></li>
                 <li><a href="/accounts/settings">settings</a></li>
                 <li><a href="/accounts/logout">logout</a></li>
@@ -169,6 +166,7 @@
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    {% block contextnav %}{% endblock %}
     {% endif %}
 
     <div class="container main-container">
