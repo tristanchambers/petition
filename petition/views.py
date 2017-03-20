@@ -34,11 +34,8 @@ def home(request):
     return render(request, 'petition/home.html', {'body_id': "home-page"})
 
 class Petitions(ListView):
-    model = Petition
-
-def petition_list(request):
-    petitions = Petition.objects.all()
-    return render(request, 'petition/petition_list.html', {'petitions': petitions})
+    def get_queryset(self):
+        return Petition.objects.filter(created_by=self.request.user)
 
 class PetitionCreate(LoginRequiredMixin, CreateView):
     model = Petition
