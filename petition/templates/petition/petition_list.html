@@ -23,7 +23,7 @@
             <a href="{{ object.get_absolute_url }}edit/">edit</a>
             <a href="{{ object.get_absolute_url }}export/">export</a>
           </td>
-          <td><span class="meta meta-progress">{{object.signatures_num}}/{{object.goal}}</span></td>
+          <td><span class="label label-default">{{object.signatures_num}}/{{object.goal}}</span></td>
         </tr>
         {% endfor %}
       </tbody>
