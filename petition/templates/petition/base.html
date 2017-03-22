@@ -140,6 +140,7 @@
       font-size: 32px;
     }
 
+    /* navbars */
     nav#navbar-main a.navbar-brand {
       font-family: Bitter, serif;
       font-weight: bold;
@@ -148,6 +149,40 @@
       color: black;
     }
 
+    /* listing */
+    .listing .edit-links {
+      word-spacing: .75em;
+    }
+    .listing .edit-links a {
+      color: #777;
+    }
+    table.listing-petitions thead {
+      opacity: 0;
+    }
+    table.listing-petitions td {
+      padding-bottom: 3em !important;
+    }
+    table.listing-petitions tr .edit-links {
+      opacity: 0;
+      transition: opacity .1s;
+    }
+    table.listing-petitions tr:hover .edit-links {
+      opacity: 1 !important;
+    }
+    table.listing-petitions .title {
+      font-size: 18px;
+    }
+
+    /* buttons */
+    .btn-clear {
+      background: none;
+      border: none;
+      color: #337ab7;
+      font-size: 32px;
+    }
+    .btn-clear:hover {
+      color: #204d74;
+    }
     </style>
   </head>
   <body id="{{ body_id }}">

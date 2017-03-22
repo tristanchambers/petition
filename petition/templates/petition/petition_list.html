@@ -4,9 +4,40 @@
 {% block title %}Petitions{% endblock %}
 
 {% block content %}
-<ul class="listing listing-petitions">
-{% for object in object_list %}
-  <li><a href="{{ object.get_absolute_url }}">{{object.title}}</a> <span class="meta meta-progress">{{object.signatures_num}}/{{object.goal}}</span></li>
-{% endfor %}
-</ul>
+<h1>My petitions</h1>
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table listing listing-petitions">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>edit</th>
+          <th>progress</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for object in object_list %}
+        <tr>
+          <td class="title"><a href="{{ object.get_absolute_url }}">{{object.title}}</a></td>
+          <td class="edit-links">
+            <a href="{{ object.get_absolute_url }}edit/">edit</a>
+            <a href="{{ object.get_absolute_url }}export/">export</a>
+          </td>
+          <td><span class="meta meta-progress">{{object.signatures_num}}/{{object.goal}}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div style="text-align: center;">
+      {% if not object_list %}
+        <p>You don't have any petitions yet.<br>
+          Make a new one:
+      {% endif %}
+      <p>
+        <a href="/new" class="btn btn-clear btn-lg" role="button"><span class="glyphicon glyphicon-plus"></span></a>
+      </p>
+    </div>
+  </div>
+</div>
 {% endblock %}
